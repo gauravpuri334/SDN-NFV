@@ -1,0 +1,638 @@
+
+====================================================================================
+Test 1: PrZ_Hosts --- ping test from PbZ to PrZ         >>> Blocked by FW
+
+h1 ping h3
+connect: Network is unreachable
+
+h1 ping h4
+connect: Network is unreachable
+
+h2 ping h3
+connect: Network is unreachable
+
+h2 ping h4
+connect: Network is unreachable
+
+
+
+====================================================================================
+Test 2: PbZ_Hosts --- ping test from PrZ to PbZ         >>> Successful Through NAPT
+
+h3 ping h1
+PING 100.0.0.10 (100.0.0.10) 56(84) bytes of data.
+64 bytes from 100.0.0.10: icmp_seq=1 ttl=64 time=32.2 ms
+64 bytes from 100.0.0.10: icmp_seq=2 ttl=64 time=1.60 ms
+
+--- 100.0.0.10 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 1.606/16.904/32.203/15.299 ms
+
+h3 ping h2
+PING 100.0.0.11 (100.0.0.11) 56(84) bytes of data.
+64 bytes from 100.0.0.11: icmp_seq=1 ttl=64 time=65.3 ms
+64 bytes from 100.0.0.11: icmp_seq=2 ttl=64 time=1.60 ms
+
+--- 100.0.0.11 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 1.607/33.471/65.335/31.864 ms
+
+h4 ping h1
+PING 100.0.0.10 (100.0.0.10) 56(84) bytes of data.
+64 bytes from 100.0.0.10: icmp_seq=1 ttl=64 time=33.2 ms
+64 bytes from 100.0.0.10: icmp_seq=2 ttl=64 time=1.48 ms
+
+--- 100.0.0.10 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 1.486/17.388/33.291/15.903 ms
+
+h4 ping h2
+PING 100.0.0.11 (100.0.0.11) 56(84) bytes of data.
+64 bytes from 100.0.0.11: icmp_seq=1 ttl=64 time=15.4 ms
+64 bytes from 100.0.0.11: icmp_seq=2 ttl=64 time=1.51 ms
+
+--- 100.0.0.11 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 1.515/8.467/15.419/6.952 ms
+
+
+
+====================================================================================
+Test 3: ping PbZ_Hosts and PrZ_Hosts -> LB2             >>> Successful
+
+h1 ping LB2
+PING 100.0.0.45 (100.0.0.45) 56(84) bytes of data.
+64 bytes from 100.0.0.45: icmp_seq=1 ttl=255 time=65.5 ms
+64 bytes from 100.0.0.45: icmp_seq=2 ttl=255 time=1.23 ms
+64 bytes from 100.0.0.45: icmp_seq=3 ttl=255 time=2.01 ms
+
+--- 100.0.0.45 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2001ms
+rtt min/avg/max/mdev = 1.233/22.919/65.514/30.120 ms
+
+h2 ping LB2
+PING 100.0.0.45 (100.0.0.45) 56(84) bytes of data.
+64 bytes from 100.0.0.45: icmp_seq=1 ttl=255 time=135 ms
+64 bytes from 100.0.0.45: icmp_seq=2 ttl=255 time=1.38 ms
+64 bytes from 100.0.0.45: icmp_seq=3 ttl=255 time=1.29 ms
+
+--- 100.0.0.45 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 1.294/46.072/135.535/63.259 ms
+
+h3 ping LB2
+PING 100.0.0.45 (100.0.0.45) 56(84) bytes of data.
+64 bytes from 100.0.0.45: icmp_seq=1 ttl=255 time=58.9 ms
+64 bytes from 100.0.0.45: icmp_seq=2 ttl=255 time=1.99 ms
+64 bytes from 100.0.0.45: icmp_seq=3 ttl=255 time=2.09 ms
+
+--- 100.0.0.45 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 1.992/21.012/58.947/26.824 ms
+
+h4 ping LB2
+PING 100.0.0.45 (100.0.0.45) 56(84) bytes of data.
+64 bytes from 100.0.0.45: icmp_seq=1 ttl=255 time=4.15 ms
+64 bytes from 100.0.0.45: icmp_seq=2 ttl=255 time=1.92 ms
+64 bytes from 100.0.0.45: icmp_seq=3 ttl=255 time=2.10 ms
+
+--- 100.0.0.45 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 1.928/2.728/4.150/1.008 ms
+
+
+
+====================================================================================
+Test 4: ping PbZ_Hosts and PrZ_Hosts -> LB1             >>> Successful
+
+h1 ping LB1
+PING 100.0.0.25 (100.0.0.25) 56(84) bytes of data.
+64 bytes from 100.0.0.25: icmp_seq=1 ttl=255 time=53.0 ms
+64 bytes from 100.0.0.25: icmp_seq=2 ttl=255 time=0.745 ms
+64 bytes from 100.0.0.25: icmp_seq=3 ttl=255 time=0.704 ms
+
+--- 100.0.0.25 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2001ms
+rtt min/avg/max/mdev = 0.704/18.176/53.079/24.680 ms
+
+h2 ping LB1
+PING 100.0.0.25 (100.0.0.25) 56(84) bytes of data.
+64 bytes from 100.0.0.25: icmp_seq=1 ttl=255 time=30.2 ms
+64 bytes from 100.0.0.25: icmp_seq=2 ttl=255 time=0.719 ms
+64 bytes from 100.0.0.25: icmp_seq=3 ttl=255 time=0.394 ms
+
+--- 100.0.0.25 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2001ms
+rtt min/avg/max/mdev = 0.394/10.439/30.205/13.977 ms
+
+h3 ping LB1
+PING 100.0.0.25 (100.0.0.25) 56(84) bytes of data.
+64 bytes from 100.0.0.25: icmp_seq=1 ttl=255 time=41.9 ms
+64 bytes from 100.0.0.25: icmp_seq=2 ttl=255 time=1.47 ms
+64 bytes from 100.0.0.25: icmp_seq=3 ttl=255 time=1.36 ms
+
+--- 100.0.0.25 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 1.364/14.926/41.944/19.104 ms
+
+h4 ping LB1
+PING 100.0.0.25 (100.0.0.25) 56(84) bytes of data.
+64 bytes from 100.0.0.25: icmp_seq=1 ttl=255 time=39.7 ms
+64 bytes from 100.0.0.25: icmp_seq=2 ttl=255 time=1.73 ms
+64 bytes from 100.0.0.25: icmp_seq=3 ttl=255 time=1.45 ms
+
+--- 100.0.0.25 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 1.452/14.297/39.703/17.965 ms
+
+
+
+====================================================================================
+Test 5: ping PbZ_Hosts and PrZ_Hosts -> DNS             >>> Blocked by LB1
+
+h1 ping ds1
+PING 100.0.0.20 (100.0.0.20) 56(84) bytes of data.
+From 100.0.0.10 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.10 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.20 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 999ms
+pipe 2
+
+h1 ping ds2
+PING 100.0.0.21 (100.0.0.21) 56(84) bytes of data.
+From 100.0.0.10 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.10 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.21 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1008ms
+pipe 2
+
+h1 ping ds3
+PING 100.0.0.22 (100.0.0.22) 56(84) bytes of data.
+From 100.0.0.10 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.10 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.22 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1009ms
+pipe 2
+
+h2 ping ds1
+PING 100.0.0.20 (100.0.0.20) 56(84) bytes of data.
+From 100.0.0.11 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.11 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.20 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1009ms
+pipe 2
+
+h2 ping ds2
+PING 100.0.0.21 (100.0.0.21) 56(84) bytes of data.
+From 100.0.0.11 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.11 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.21 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1009ms
+pipe 2
+
+h2 ping ds3
+PING 100.0.0.22 (100.0.0.22) 56(84) bytes of data.
+From 100.0.0.11 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.11 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.22 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1009ms
+pipe 2
+
+h3 ping ds1
+PING 100.0.0.20 (100.0.0.20) 56(84) bytes of data.
+
+--- 100.0.0.20 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1008ms
+
+
+h3 ping ds2
+PING 100.0.0.21 (100.0.0.21) 56(84) bytes of data.
+
+--- 100.0.0.21 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1006ms
+
+
+h3 ping ds3
+PING 100.0.0.22 (100.0.0.22) 56(84) bytes of data.
+
+--- 100.0.0.22 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1006ms
+
+
+h4 ping ds1
+PING 100.0.0.20 (100.0.0.20) 56(84) bytes of data.
+
+--- 100.0.0.20 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1006ms
+
+
+h4 ping ds2
+PING 100.0.0.21 (100.0.0.21) 56(84) bytes of data.
+
+--- 100.0.0.21 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1006ms
+
+
+h4 ping ds3
+PING 100.0.0.22 (100.0.0.22) 56(84) bytes of data.
+
+--- 100.0.0.22 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1006ms
+
+
+
+
+====================================================================================
+Test 6: ping PbZ_Hosts and PrZ_Hosts -> WS              >>> Blocked by LB2
+
+h1 ping ws1
+PING 100.0.0.40 (100.0.0.40) 56(84) bytes of data.
+From 100.0.0.10 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.10 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.40 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1006ms
+pipe 2
+
+h1 ping ws2
+PING 100.0.0.41 (100.0.0.41) 56(84) bytes of data.
+From 100.0.0.10 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.10 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.41 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1008ms
+pipe 2
+
+h1 ping ws3
+PING 100.0.0.42 (100.0.0.42) 56(84) bytes of data.
+From 100.0.0.10 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.10 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.42 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1008ms
+pipe 2
+
+h2 ping ws1
+PING 100.0.0.40 (100.0.0.40) 56(84) bytes of data.
+From 100.0.0.11 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.11 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.40 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1008ms
+pipe 2
+
+h2 ping ws2
+PING 100.0.0.41 (100.0.0.41) 56(84) bytes of data.
+From 100.0.0.11 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.11 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.41 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1009ms
+pipe 2
+
+h2 ping ws3
+PING 100.0.0.42 (100.0.0.42) 56(84) bytes of data.
+From 100.0.0.11 icmp_seq=1 Destination Host Unreachable
+From 100.0.0.11 icmp_seq=2 Destination Host Unreachable
+
+--- 100.0.0.42 ping statistics ---
+2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1009ms
+pipe 2
+
+h3 ping ws1
+PING 100.0.0.40 (100.0.0.40) 56(84) bytes of data.
+
+--- 100.0.0.40 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1008ms
+
+
+h3 ping ws2
+PING 100.0.0.41 (100.0.0.41) 56(84) bytes of data.
+
+--- 100.0.0.41 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1006ms
+
+
+h3 ping ws3
+PING 100.0.0.42 (100.0.0.42) 56(84) bytes of data.
+
+--- 100.0.0.42 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1006ms
+
+
+h4 ping ws1
+PING 100.0.0.40 (100.0.0.40) 56(84) bytes of data.
+
+--- 100.0.0.40 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1006ms
+
+
+h4 ping ws2
+PING 100.0.0.41 (100.0.0.41) 56(84) bytes of data.
+
+--- 100.0.0.41 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1006ms
+
+
+h4 ping ws3
+PING 100.0.0.42 (100.0.0.42) 56(84) bytes of data.
+
+--- 100.0.0.42 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1000ms
+
+
+
+
+====================================================================================
+Test 7: PbZ_Hosts and PbZ_Hosts -> nslookup             >>> DNS round-robin
+
+h1 nslookup
+;; Warning: query response not set
+Server:         100.0.0.25
+Address:        100.0.0.25#53
+
+Non-authoritative answer:
+Name:   kth.se
+Address: 100.0.0.45
+
+
+h2 nslookup
+;; Warning: query response not set
+Server:         100.0.0.25
+Address:        100.0.0.25#53
+
+Non-authoritative answer:
+Name:   kth.se
+Address: 100.0.0.45
+
+
+h3 nslookup
+;; Warning: query response not set
+Server:         100.0.0.25
+Address:        100.0.0.25#53
+
+Non-authoritative answer:
+Name:   kth.se
+Address: 100.0.0.45
+
+
+h4 nslookup
+;; Warning: query response not set
+Server:         100.0.0.25
+Address:        100.0.0.25#53
+
+Non-authoritative answer:
+Name:   kth.se
+Address: 100.0.0.45
+
+
+
+
+====================================================================================
+Test 8: PbZ_Hosts and PbZ_Hosts -> echo
+
+h1 echo
+<head>
+<title>Error response</title>
+</head>
+<body>
+<h1>Error response</h1>
+<p>Error code 400.
+<p>Message: Bad request syntax ('abs').
+<p>Error code explanation: 400 = Bad request syntax or unsupported method.
+</body>
+
+h2 echo
+<head>
+<title>Error response</title>
+</head>
+<body>
+<h1>Error response</h1>
+<p>Error code 400.
+<p>Message: Bad request syntax ('abs').
+<p>Error code explanation: 400 = Bad request syntax or unsupported method.
+</body>
+
+h3 echo
+<head>
+<title>Error response</title>
+</head>
+<body>
+<h1>Error response</h1>
+<p>Error code 400.
+<p>Message: Bad request syntax ('abs').
+<p>Error code explanation: 400 = Bad request syntax or unsupported method.
+</body>
+
+h4 echo
+<head>
+<title>Error response</title>
+</head>
+<body>
+<h1>Error response</h1>
+<p>Error code 400.
+<p>Message: Bad request syntax ('abs').
+<p>Error code explanation: 400 = Bad request syntax or unsupported method.
+</body>
+
+
+
+====================================================================================
+Test 9: Test UDP connection
+
+Open iperf h1   >>> Successful PrZ to PbZ
+------------------------------------------------------------
+Server listening on UDP port 1053
+Receiving 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+
+h3 iperf h1
+------------------------------------------------------------
+Client connecting to 100.0.0.10, UDP port 1053
+Sending 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3] local 10.0.0.50 port 52995 connected with 100.0.0.10 port 1053
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0- 1.0 sec   131 KBytes  1.05 Mbits/sec
+[  3] Sent 91 datagrams
+[  3] Server Report:
+[  3]  0.0- 1.0 sec   131 KBytes  1.07 Mbits/sec   0.062 ms    2/   91 (2.2%)
+[  3]  0.0- 1.0 sec  2 datagrams received out-of-order
+
+Open iperf h3   >>> Restricted PbZ to PrZ Blocked by NAPT
+------------------------------------------------------------
+Server listening on UDP port 1053
+Receiving 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+
+h1 iperf h3
+[  3] local 100.0.0.10 port 1053 connected with 100.0.0.1 port 46640
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0- 1.0 sec   131 KBytes  1.07 Mbits/sec   0.062 ms    2/   91 (2.2%)
+[  3]  0.0- 1.0 sec  2 datagrams received out-of-order
+connect failed: Network is unreachable
+
+Open iperf ds1   >>> Successful Through LB1
+WARNING: No route found for IPv6 destination :: (no default route?)
+Spoofed DNS Response Sent from
+False
+Spoofed DNS Response Sent from
+False
+------------------------------------------------------------
+Server listening on UDP port 53
+Receiving 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+
+Open iperf ds2   >>> Successful Through LB1
+WARNING: No route found for IPv6 destination :: (no default route?)
+Spoofed DNS Response Sent from
+False
+------------------------------------------------------------
+Server listening on UDP port 53
+Receiving 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+
+Open iperf ds3   >>> Successful Through LB1
+WARNING: No route found for IPv6 destination :: (no default route?)
+Spoofed DNS Response Sent from
+False
+------------------------------------------------------------
+Server listening on UDP port 53
+Receiving 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+
+h2 iperf DNS
+------------------------------------------------------------
+Client connecting to 100.0.0.25, UDP port 53
+Sending 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3] local 100.0.0.11 port 37291 connected with 100.0.0.25 port 53
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0- 1.0 sec   131 KBytes  1.05 Mbits/sec
+[  3] Sent 91 datagrams
+[  3] Server Report:
+[  3]  0.0- 1.0 sec   131 KBytes  1.07 Mbits/sec   0.035 ms    1/   91 (1.1%)
+[  3]  0.0- 1.0 sec  1 datagrams received out-of-order
+
+h4 iperf DNS
+------------------------------------------------------------
+Client connecting to 100.0.0.25, UDP port 53
+Sending 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3] local 10.0.0.51 port 55152 connected with 100.0.0.25 port 53
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0- 1.0 sec   131 KBytes  1.05 Mbits/sec
+[  3] Sent 91 datagrams
+[  3] Server Report:
+[  3]  0.0- 1.0 sec   131 KBytes  1.06 Mbits/sec   0.043 ms    0/   91 (0%)
+
+
+
+====================================================================================
+Test 10: Test TCP connection
+
+Open nc h2   >>> Successful PrZ to PbZ
+
+h4 nc h2
+Up
+
+Open nc h4   >>> Restricted PbZ to PrZ Blocked by NAPT
+
+h2 nc h4
+Down
+
+Open nc ws1   >>> Successful Through LB2
+Serving HTTP on 0.0.0.0 port 80 ...
+100.0.0.45 - - [24/May/2016 23:56:23] code 400, message Bad request syntax ('abs')
+100.0.0.45 - - [24/May/2016 23:56:23] "abs" 400 -
+100.0.0.45 - - [24/May/2016 23:56:23] code 400, message Bad request syntax ('abs')
+100.0.0.45 - - [24/May/2016 23:56:23] "abs" 400 -
+nc: Address already in use
+
+Open nc ws2   >>> Successful Through LB2
+Serving HTTP on 0.0.0.0 port 80 ...
+100.0.0.45 - - [24/May/2016 23:56:23] code 400, message Bad request syntax ('abs')
+100.0.0.45 - - [24/May/2016 23:56:23] "abs" 400 -
+nc: Address already in use
+
+Open nc ws3   >>> Successful Through LB2
+Serving HTTP on 0.0.0.0 port 80 ...
+100.0.0.45 - - [24/May/2016 23:56:23] code 400, message Bad request syntax ('abs')
+100.0.0.45 - - [24/May/2016 23:56:23] "abs" 400 -
+nc: Address already in use
+
+h2 nc DNS
+Up
+
+h4 nc DNS
+Up
+
+
+
+====================================================================================
+Open Inspector
+tcpdump: listening on insp-eth0, link-type EN10MB (Ethernet), capture size 65535 bytes
+
+
+Test 11: IDS allows POST & PUT  >>>     Successful
+
+h1 POST 100.0.0.45
+
+h3 POST 100.0.0.45
+
+h1 PUT  100.0.0.45
+
+h3 PUT  100.0.0.45
+
+
+
+====================================================================================
+Test 12: IDS Inspcts PUT        >>>     Linux and SQL code injection Blocked
+
+h1 PUT cat /var/log/ 100.0.0.45
+[4] 16469
+
+h1 PUT cat /etc/passwd 100.0.0.45
+[5] 16470
+
+h1 PUT INSERT 100.0.0.45
+[6] 16471
+
+h1 PUT UPDATE 100.0.0.45
+[7] 16472
+
+h1 PUT DELETE 100.0.0.45
+[8] 16473
+
+
+
+====================================================================================
+Test 13: IDS Inspcts HTTP Methods >>> Blocked
+
+h4 GET
+
+h4 HEAD
+
+h4 OPTIONS
+
+h4 TRACE
+
+h4 DELETE
+[6] 16478
+
+h4 CONNECT
+

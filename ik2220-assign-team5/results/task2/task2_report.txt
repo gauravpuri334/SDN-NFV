@@ -1,0 +1,50 @@
+
+
+Output from mininet (as we can see the firewall works):
+
+02:26:53 ~/deliverables/task1$ sudo python topo.py 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> h1 ping h3
+PING 100.0.0.50 (100.0.0.50) 56(84) bytes of data.
+^C
+--- 100.0.0.50 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2014ms
+
+mininet> h3 ping h1
+PING 100.0.0.10 (100.0.0.10) 56(84) bytes of data.
+64 bytes from 100.0.0.10: icmp_seq=1 ttl=64 time=21.0 ms
+64 bytes from 100.0.0.10: icmp_seq=2 ttl=64 time=0.508 ms
+^C
+--- 100.0.0.10 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.508/10.770/21.033/10.263 ms
+mininet> h4 iperf -s -p 1025
+------------------------------------------------------------
+Server listening on TCP port 1025
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+^Cmininet> h4 iperf -s -p 1025 &
+------------------------------------------------------------
+Server listening on TCP port 1025
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+mininet> h2 iperf -c h4 -p 1025
+connect failed: Connection timed out
+mininet> h2 iperf -s -p 1025 &
+------------------------------------------------------------
+Server listening on TCP port 1025
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+mininet> h4 iperf -c h2 -p 1025
+------------------------------------------------------------
+Client connecting to 100.0.0.11, TCP port 1025
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+[  3] local 100.0.0.51 port 58185 connected with 100.0.0.11 port 1025
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-10.0 sec  21.8 GBytes  18.7 Gbits/sec
+mininet>
